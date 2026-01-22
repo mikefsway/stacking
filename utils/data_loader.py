@@ -3,8 +3,24 @@ Data loading and management utilities
 """
 
 import json
+import streamlit as st
 from pathlib import Path
 from typing import Dict, List, Optional
+
+
+@st.cache_data
+def load_stacking_data(data_path: str = "data/stacking_data.json") -> Dict:
+    """
+    Load stacking data from JSON file (cached)
+
+    Args:
+        data_path: Path to the JSON file
+
+    Returns:
+        Dictionary with stacking data
+    """
+    with open(data_path, 'r', encoding='utf-8') as f:
+        return json.load(f)
 
 
 class StackingDataLoader:
@@ -15,10 +31,9 @@ class StackingDataLoader:
         self._data = None
 
     def load_data(self) -> Dict:
-        """Load the stacking data from JSON file"""
+        """Load the stacking data from JSON file (uses cached function)"""
         if self._data is None:
-            with open(self.data_path, 'r', encoding='utf-8') as f:
-                self._data = json.load(f)
+            self._data = load_stacking_data(str(self.data_path))
         return self._data
 
     @property

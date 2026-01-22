@@ -1,8 +1,9 @@
 [theme]
-primaryColor = "#667eea"
+# Updated for WCAG 2.2 AA compliance (contrast ratio ≥ 4.5:1)
+primaryColor = "#5a67d8"  # Slightly darker for better contrast
 backgroundColor = "#ffffff"
-secondaryBackgroundColor = "#f0f2f6"
-textColor = "#262730"
+secondaryBackgroundColor = "#f7fafc"  # Lighter for better distinction
+textColor = "#1a202c"  # Darker for better contrast (was #262730)
 font = "sans serif"
 
 [server]
