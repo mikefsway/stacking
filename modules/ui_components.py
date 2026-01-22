@@ -776,3 +776,397 @@ def render_enhanced_sidebar(metadata: Dict):
 
         # Analytics consent
         render_analytics_consent()
+
+
+# ============================================================================
+# NEW COMPONENTS FOR V3.0 - VALUE STACKING FOCUSED
+# ============================================================================
+
+def render_stacking_explainer():
+    """Render detailed explanation of the three stacking modes"""
+
+    st.markdown("### Three Ways to Stack Services")
+
+    # Co-delivery
+    st.markdown("""
+        <div class="mode-card">
+            <div class="mode-icon">🔄</div>
+            <div class="mode-title">Co-delivery</div>
+            <div class="mode-description">
+                <strong>What it is:</strong> Use the same megawatt (MW) capacity for multiple services
+                at the same time, in the same direction.<br><br>
+
+                <strong>Example:</strong> A battery providing 2 MW of frequency response while also
+                enrolled in the Capacity Market. Both services count the same 2 MW simultaneously.<br><br>
+
+                <strong>When to use:</strong> When services have compatible technical requirements and
+                don't conflict in their delivery obligations. This is the "holy grail" of stacking—
+                getting paid twice for the same capacity.<br><br>
+
+                <strong>Key requirement:</strong> Service rules must explicitly allow co-delivery,
+                or at minimum not prohibit it.
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+    # Splitting
+    st.markdown("""
+        <div class="mode-card">
+            <div class="mode-icon">✂️</div>
+            <div class="mode-title">Splitting</div>
+            <div class="mode-description">
+                <strong>What it is:</strong> Divide your asset's capacity between different services
+                at the same time.<br><br>
+
+                <strong>Example:</strong> A 5 MW battery split into 3 MW for Dynamic Containment
+                and 2 MW for a local flexibility service. Both run simultaneously but use different
+                portions of the battery.<br><br>
+
+                <strong>When to use:</strong> When co-delivery isn't allowed but you have enough
+                capacity to meet minimum requirements for multiple services. Common with large
+                batteries or flexible industrial loads.<br><br>
+
+                <strong>Key requirement:</strong> You must have sufficient capacity to meet the
+                minimum size requirements for each service (e.g., many services require 1 MW minimum).
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+    # Jumping
+    st.markdown("""
+        <div class="mode-card">
+            <div class="mode-icon">⚡</div>
+            <div class="mode-title">Jumping</div>
+            <div class="mode-description">
+                <strong>What it is:</strong> Switch the same asset between different services at
+                different times of day or different days of the week.<br><br>
+
+                <strong>Example:</strong> Using a battery for peak reduction during weekday afternoons
+                (4-7pm), then switching to frequency response service during nights and weekends.<br><br>
+
+                <strong>When to use:</strong> When services operate at different times or have
+                different delivery windows. This is often the easiest form of stacking since there's
+                no conflict—you're simply scheduling different activities.<br><br>
+
+                <strong>Key requirement:</strong> Services must not require 24/7 availability, and
+                you must have operational flexibility to switch modes. Contract terms should allow
+                partial availability or scheduled participation.
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+
+def render_educational_content():
+    """Render educational content about value stacking strategies"""
+
+    st.markdown("---")
+    st.markdown("### Why Value Stacking Matters")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("""
+        **The Challenge:**
+
+        Individual flexibility services often provide modest returns. A single service might
+        cover only 10-30% of the capital cost of a battery, or provide limited savings for
+        industrial load shifting.
+
+        Without stacking, many projects struggle to achieve commercial viability.
+        """)
+
+    with col2:
+        st.markdown("""
+        **The Opportunity:**
+
+        By combining compatible services, you can:
+        - Increase revenue by 2-5x compared to a single service
+        - Improve project ROI and payback periods
+        - De-risk investments by diversifying revenue streams
+        - Make better use of existing assets
+        """)
+
+    st.markdown("---")
+    st.markdown("### Getting Started with Stacking")
+
+    with st.expander("Step 1: Understand Your Asset's Capabilities"):
+        st.markdown("""
+        Before exploring stacking opportunities, you need to know:
+
+        - **Capacity:** How many MW can your asset provide?
+        - **Response time:** How quickly can it react to signals? (seconds, minutes, hours)
+        - **Duration:** How long can it sustain its response? (30 minutes, 2 hours, 4+ hours)
+        - **Availability:** When is it available? (24/7, weekdays only, specific hours)
+        - **Operational constraints:** What limits your flexibility? (production schedules, comfort requirements, battery cycling)
+
+        This information determines which services you're technically eligible for and which
+        stacking strategies are feasible.
+        """)
+
+    with st.expander("Step 2: Identify Compatible Services"):
+        st.markdown("""
+        Use the **Compatibility Tool** to check which services can be combined.
+
+        Start with 2-3 services that seem relevant to your asset type:
+        - **Batteries:** Dynamic Containment, Demand Flexibility Service, local DNO services
+        - **EV Fleets:** Demand Flexibility Service, Triad avoidance, local flexibility
+        - **HVAC/Buildings:** Peak reduction, Demand Flexibility Service
+        - **Industrial:** Load shifting, local constraint management, peak reduction
+
+        The tool will show you which combinations work for co-delivery, splitting, and jumping.
+        """)
+
+    with st.expander("Step 3: Evaluate Commercial Viability"):
+        st.markdown("""
+        Not all technically compatible combinations make commercial sense.
+
+        Consider:
+        - **Revenue potential:** Will the added complexity justify the extra revenue?
+        - **Contract terms:** Lock-in periods, penalties, minimum commitments
+        - **Operational complexity:** Can your team manage multiple service obligations?
+        - **Technology requirements:** Do you need new control systems or metering?
+        - **Risk:** What happens if you fail to deliver on one service?
+
+        Start simple—often 2-3 well-chosen services provide 80% of the benefit with 20% of the complexity.
+        """)
+
+    with st.expander("Step 4: Plan Your Implementation"):
+        st.markdown("""
+        **Phased approach works best:**
+
+        1. **Phase 1 (Months 1-3):** Start with one "anchor" service that provides stable,
+           predictable revenue (e.g., Capacity Market, ToU optimization)
+
+        2. **Phase 2 (Months 4-6):** Add a second compatible service using jumping
+           (easiest to manage, no conflict risk)
+
+        3. **Phase 3 (Months 7-12):** Explore splitting or co-delivery once you've built
+           operational confidence
+
+        **Key success factors:**
+        - Strong control systems and automation
+        - Clear operational procedures and fallback plans
+        - Good relationships with service operators
+        - Regular performance monitoring and optimization
+        """)
+
+    st.markdown("---")
+    st.markdown("### Common Stacking Combinations")
+
+    st.markdown("""
+    Based on current UK market rules, here are some commonly viable stacking strategies:
+    """)
+
+    combo_col1, combo_col2 = st.columns(2)
+
+    with combo_col1:
+        st.markdown("""
+        **For Large Batteries (>1 MW):**
+        - Dynamic Containment + Capacity Market (co-delivery possible)
+        - DC/DM + DNO services (splitting or jumping)
+        - Wholesale trading + frequency services (jumping)
+
+        **For Smaller Batteries (<1 MW):**
+        - ToU arbitrage + Demand Flexibility Service (jumping)
+        - Peak shaving + local flexibility services (co-delivery may be possible)
+        """)
+
+    with combo_col2:
+        st.markdown("""
+        **For EV Fleets:**
+        - Smart charging + Demand Flexibility Service (jumping)
+        - Triad avoidance + ToU optimization (co-delivery)
+
+        **For Industrial/Commercial Sites:**
+        - Peak reduction + HVAC flexibility (splitting)
+        - Demand Flexibility Service + ToU shifting (co-delivery)
+        - Local DNO services + Triad avoidance (jumping)
+        """)
+
+    st.info("""
+    💡 **Important:** Market rules change frequently. Always verify current compatibility
+    rules with NESO, your DNO, and service operators before committing to a stacking strategy.
+    This tool reflects rules as of January 2025.
+    """)
+
+
+def render_simple_faq():
+    """Render simplified FAQ focused on value stacking"""
+
+    st.markdown("### Frequently Asked Questions")
+
+    with st.expander("What is value stacking in energy flexibility?"):
+        st.markdown("""
+        Value stacking means combining revenue from multiple flexibility services
+        to maximize the value of your energy asset.
+
+        Instead of participating in just one program (e.g., only Capacity Market),
+        you layer multiple revenue streams by carefully selecting compatible services.
+
+        For example, a battery might earn revenue from:
+        1. Capacity Market payments (for being available)
+        2. Frequency response services (for rapid power adjustments)
+        3. Local network support (for helping your DNO manage constraints)
+
+        All using the same asset, at the same or different times.
+        """)
+
+    with st.expander("How do I know if services are compatible?"):
+        st.markdown("""
+        Use the **Compatibility Tool** tab to check specific service combinations.
+
+        The tool is based on official ENA guidance and shows three compatibility modes:
+        - **Co-delivery:** Can you use the same MW for both services simultaneously?
+        - **Splitting:** Can you divide your asset between services?
+        - **Jumping:** Can you switch between services at different times?
+
+        If all three show "Explicit No," the services can't be stacked.
+        If any show "Explicit Yes," there's a stacking opportunity.
+        """)
+
+    with st.expander("What's the difference between co-delivery, splitting, and jumping?"):
+        st.markdown("""
+        **Co-delivery (🔄):** The most valuable form. You get paid by multiple services
+        for the *same* capacity at the *same* time. Example: Earning from both Capacity
+        Market and Dynamic Containment with the same 2 MW battery.
+
+        **Splitting (✂️):** You divide your capacity. Example: 3 MW for one service,
+        2 MW for another, using a 5 MW battery. Both run simultaneously.
+
+        **Jumping (⚡):** Time-based switching. Example: Frequency response at night,
+        peak reduction during the day. Same asset, different times.
+
+        See the "Learn About Stacking" tab for detailed explanations and examples.
+        """)
+
+    with st.expander("Do I need special equipment to stack services?"):
+        st.markdown("""
+        It depends on the services and your asset:
+
+        **Minimum requirements:**
+        - Smart metering (usually half-hourly settlement)
+        - Some form of remote control or automation
+        - Monitoring and reporting capability
+
+        **For advanced stacking:**
+        - Sophisticated control systems that can manage multiple obligations
+        - Fast communication (especially for frequency services)
+        - Battery management systems (for storage)
+        - Building management systems (for HVAC/demand response)
+
+        Start simple—jumping between services typically requires less sophisticated
+        tech than co-delivery or splitting.
+        """)
+
+    with st.expander("What are the risks of value stacking?"):
+        st.markdown("""
+        **Operational risks:**
+        - Conflicting obligations if compatibility rules change
+        - Complexity in managing multiple service requirements
+        - Performance penalties if you fail to deliver
+
+        **Commercial risks:**
+        - Contract lock-in periods that reduce flexibility
+        - Market price changes reducing revenue expectations
+        - Added costs for technology and operational management
+
+        **How to mitigate:**
+        - Start with 2-3 compatible services, not 5-6
+        - Choose jumping over co-delivery initially (simpler, lower risk)
+        - Build in contingency plans and "fail-safe" modes
+        - Keep good records and monitor performance closely
+        - Maintain relationships with service operators
+        """)
+
+    with st.expander("How much revenue can I expect from stacking?"):
+        st.markdown("""
+        Revenue varies widely based on:
+        - Asset type, size, and capabilities
+        - Which services you can access
+        - Market conditions and auction results
+        - Your operational flexibility and performance
+
+        **Rough benchmarks (as of 2025):**
+        - Battery (1 MW, 1 hour): £50k-150k/year for single service → £100k-300k/year with stacking
+        - EV fleet (500 kW flexible load): £10k-30k/year savings/revenue
+        - Industrial demand response (2 MW): £20k-80k/year
+
+        These are indicative only. Actual results depend heavily on specific circumstances.
+
+        **This tool does not provide value estimates** - it focuses on compatibility.
+        Consult with service operators or energy consultants for project-specific revenue forecasts.
+        """)
+
+    with st.expander("Where should I start?"):
+        st.markdown("""
+        **1. Understand your asset** - Know your capacity, response time, duration, and operational constraints
+
+        **2. Use the Compatibility Tool** - Check which services you could technically combine
+
+        **3. Research service terms** - Visit NESO, your DNO, and service aggregator websites to
+        understand eligibility, minimum sizes, and contract terms
+
+        **4. Start simple** - Pick 1-2 compatible services for your first attempt. Jumping is
+        usually easier than splitting or co-delivery.
+
+        **5. Seek expert help** - Many aggregators and consultants offer free initial assessments.
+        They can help navigate the complexity and handle the commercial arrangements.
+
+        Use the **Contact** tab if you'd like to discuss your specific situation.
+        """)
+
+
+def render_simple_contact_form():
+    """Render simplified contact form focused on value stacking questions"""
+
+    st.markdown("""
+    Have questions about value stacking or compatibility results?
+    We typically respond within 2 working days.
+    """)
+
+    with st.form("simple_contact_form"):
+        col1, col2 = st.columns(2)
+
+        with col1:
+            name = st.text_input("Name *")
+            email = st.text_input("Email *")
+
+        with col2:
+            org = st.text_input("Organization (optional)")
+            asset_type = st.selectbox(
+                "Primary Interest",
+                options=[
+                    "General question about value stacking",
+                    "Battery storage project",
+                    "EV fleet management",
+                    "Industrial/commercial demand response",
+                    "HVAC/building flexibility",
+                    "Aggregator/service provider",
+                    "Academic/research",
+                    "Other"
+                ]
+            )
+
+        message = st.text_area(
+            "Your Question or Message",
+            height=120,
+            placeholder="E.g., 'I have a 2 MW battery in the Midlands and want to understand stacking options...'"
+        )
+
+        submitted = st.form_submit_button("Send Message", type="primary", use_container_width=True)
+
+        if submitted:
+            if not name or not email:
+                st.error("Please fill in name and email")
+            elif "@" not in email:
+                st.error("Please enter a valid email address")
+            else:
+                success = save_lead(name, email, org, asset_type, message)
+
+                if success:
+                    st.success("✅ Message sent! We'll respond within 2 working days.")
+                    log_analytics_event('contact_form_submit', {'interest': asset_type})
+                else:
+                    st.error("Something went wrong. Please try again or email us directly.")
+
+    st.caption("🔒 We only use your details to respond to your inquiry. No spam, no third-party sharing.")
